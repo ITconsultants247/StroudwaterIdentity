@@ -1,0 +1,20 @@
+1.  Aspnetboilerplate.com core 2.X angualer template with Module Zero
+2.  Unzip and place in its own project folder
+3.  Use powershell to restore packages ( faster and easier than vs 2107)
+		a.  cd aspnet-core
+		b.  dotnet restore
+		c.  cd..
+		d.  cd angular
+		e.  npm install
+4.  Open aspnet project in VS 2017
+5.  Make web.host project as startup project  ** important for updating database and running project **
+6.  validate Connection String in appsettings.json
+7.  Rebuild solution
+8.  In Project/Package Manager select EntityFrameworkCore as default project and run update-database  
+9.  Recommended: upgrade packages if needed
+10.  Rebuild again
+11.  Start/Run Solution
+
+==============================================
+
+ 

@@ -1,4 +1,5 @@
 ﻿using Abp.EntityFrameworkCore.Configuration;
+using Abp.IdentityServer4;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using Abp.Zero.EntityFrameworkCore;
@@ -7,7 +8,8 @@ using StroudwaterIdentity.EntityFrameworkCore.Seed;
 namespace StroudwaterIdentity.EntityFrameworkCore
 {
     [DependsOn(
-        typeof(StroudwaterIdentityCoreModule), 
+        typeof(StroudwaterIdentityCoreModule),
+        typeof(AbpZeroCoreIdentityServerEntityFrameworkCoreModule),
         typeof(AbpZeroCoreEntityFrameworkCoreModule))]
     public class StroudwaterIdentityEntityFrameworkModule : AbpModule
     {

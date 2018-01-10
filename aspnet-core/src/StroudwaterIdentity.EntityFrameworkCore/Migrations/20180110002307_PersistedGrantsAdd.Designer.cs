@@ -15,9 +15,10 @@ using System;
 namespace StroudwaterIdentity.Migrations
 {
     [DbContext(typeof(StroudwaterIdentityDbContext))]
-    partial class StroudwaterIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180110002307_PersistedGrantsAdd")]
+    partial class PersistedGrantsAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

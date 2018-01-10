@@ -14,6 +14,9 @@ using Abp.Extensions;
 using StroudwaterIdentity.Authentication.JwtBearer;
 using StroudwaterIdentity.Configuration;
 using StroudwaterIdentity.Identity;
+using Abp.IdentityServer4;
+using StroudwaterIdentity.EntityFrameworkCore;
+using StroudwaterIdentity.Authorization.Users;
 
 #if FEATURE_SIGNALR
 using Microsoft.AspNet.SignalR;
@@ -46,7 +49,23 @@ namespace StroudwaterIdentity.Web.Host.Startup
             );
 
             IdentityRegistrar.Register(services);
+
+            services.AddIdentityServer()
+                .AddDeveloperSigningCredential()
+                .AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
+                .AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
+                .AddInMemoryClients(IdentityServerConfig.GetClients())
+                .AddAbpPersistedGrants<StroudwaterIdentityDbContext>()
+                .AddAbpIdentityServer<User>();
+
+            services.AddAuthentication().AddIdentityServerAuthentication("IdentityBearer", options =>
+            {
+                options.Authority = "http://localhost:21021/";
+                options.RequireHttpsMetadata = false;
+            });
+
             AuthConfigurer.Configure(services, _appConfiguration);
+
 
 #if FEATURE_SIGNALR_ASPNETCORE
             services.AddSignalR();
@@ -107,6 +126,9 @@ namespace StroudwaterIdentity.Web.Host.Startup
             app.UseAuthentication();
 
             app.UseJwtTokenMiddleware();
+
+            //IdentityServer4
+            app.UseIdentityServer();
 
             app.UseAbpRequestLocalization();
 

@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Abp.Castle.Log4Net" Version="3.3.0" />
+    <PackageReference Include="IdentityServer4" Version="2.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StroudwaterIdentity.Core\StroudwaterIdentity.Core.csproj" />

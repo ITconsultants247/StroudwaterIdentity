@@ -212,8 +212,10 @@ namespace StroudwaterIdentity.Controllers
         private static List<Claim> CreateJwtClaims(ClaimsIdentity identity)
         {
             var claims = identity.Claims.ToList();
-            var nameIdClaim = claims.First(c => c.Type == ClaimTypes.NameIdentifier);
-
+            //modified line below as it was returning error 500
+            //var nameIdClaim = claims.First(c => c.Type == ClaimTypes.Name);
+            var nameIdClaim = claims.First(c => c.Type == "sub");
+            
             // Specifically add the jti (random nonce), iat (issued timestamp), and sub (subject/user) claims.
             claims.AddRange(new[]
             {
